@@ -8,6 +8,10 @@ let hue = 0;
 let number = 0;
 let scale = 10;
 
+
+let textY = -10;
+let dy = 5;
+
 function drawFlower() {
   let angle = number * 5;
   let radius = scale * Math.sqrt(number);
@@ -27,15 +31,27 @@ function drawFlower() {
   hue += 2;
 }
 
-function animate() {
+function animateFlower() {
   //ctx.clearRect(0, 0, canvas.width, canvas.height);
   drawFlower();
   if (number > 150) return;
-  requestAnimationFrame(animate);
+  requestAnimationFrame(animateFlower);
 }
-animate();
+animateFlower();
 
-ctx.font = '33px sans-serif';
-ctx.fillStyle = 'lightgreen'
-ctx.textAlign = 'center';
-ctx.fillText('whattuuuuup', canvas.width / 2, 100)
+function drawText() {
+  ctx.font = '33px sans-serif';
+  ctx.fillStyle = 'lightgreen'
+  ctx.textAlign = 'center';
+  ctx.fillText('whattuuuuup', canvas.width / 2, textY);
+    
+}
+
+function animateText() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  drawText();
+  textY += dy;
+  if (textY >= 100) return;
+  requestAnimationFrame(animateText);
+}
+animateText();
